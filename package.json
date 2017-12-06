@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && webpack --progress",
-    "build:production": "NODE_ENV=production run clean && webpack -p --progress",
+    "build:production": "set NODE_ENV=production run clean && webpack -p --progress",
     "clean": "rimraf client/dist",
     "start": "node ./server/index.js",
-    "test": "mocha -w test/test_helper.js \"test/components/**/*.test.js\" --require ignore-styles",
-    "test:watch": "npm run test -- --watch"
+    "test": "mocha -w test/test_helper.js \"test/components/**/*.test.js\" --require ignore-styles"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +21,6 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.2",
-    "chai-jquery": "^2.0.0",
     "css-loader": "^0.28.4",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",

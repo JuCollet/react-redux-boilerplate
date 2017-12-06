@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 
-module.exports = {
+const config = {
     entry : {
         bundle : './client/index.js',
         vendor : ['react', 'react-dom', 'redux', 'react-redux', 'react-router-dom']
@@ -16,8 +16,7 @@ module.exports = {
         historyApiFallback: true,
         contentBase: __dirname + '/client/dist',
         host: process.env.IP,
-        port: process.env.PORT,
-        "public": "reactreduxboilerplate.c9users.io"
+        port: process.env.PORT
     },
     module : {
         rules : [
@@ -58,9 +57,17 @@ module.exports = {
             files : {
                 css : ['styles/styles.css', ]
             }
-        }),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV' : JSON.stringify(process.env.NODE_ENV)
         })
     ]
 };
+
+if (process.env.NODE_ENV === 'production') {  
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production')
+      }),
+      new webpack.optimize.UglifyJsPlugin()
+    );
+}
+
+module.exports =  config;
