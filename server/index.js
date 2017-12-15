@@ -1,10 +1,9 @@
-'use strict';
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
-const express = require('express'),
-      path = require('path'),
-      bodyParser = require('body-parser'),
-      morgan = require('morgan'),
-      app = express();
+const app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -16,15 +15,13 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'client/dist', 'index.html'));
 });
 
-app.use(function(err,req,res,next){
+app.use((err, req, res) => {
   res.status(err.status || 500);
   res.json({
-    error : {
-      message : err.message
-    }
+    error: {
+      message: err.message,
+    },
   });
 });
 
-app.listen(process.env.PORT || 8080, function(){
-  console.log('Server running');
-});
+app.listen(process.env.PORT || 8080);

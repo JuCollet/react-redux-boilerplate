@@ -1,11 +1,11 @@
 require('babel-register')();
 require('ignore-styles').default(['.ttf', '.less', '.png', '.svg']);
 
-var jsdom = require('jsdom').jsdom;
-var configure = require('enzyme').configure;
-var Adapter = require('enzyme-adapter-react-16');
+const { jsdom } = require('jsdom');
+const { configure } = require('enzyme');
+const Adapter = require('enzyme-adapter-react-16');
 
-var exposedProperties = ['window', 'navigator', 'document'];
+const exposedProperties = ['window', 'navigator', 'document'];
 
 configure({ adapter: new Adapter() });
 
@@ -19,5 +19,5 @@ Object.keys(document.defaultView).forEach((property) => {
 });
 
 global.navigator = {
-  userAgent: 'node.js'
+  userAgent: 'node.js',
 };
